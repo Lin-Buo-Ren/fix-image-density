@@ -6,6 +6,8 @@ set \
 	-o nounset
 
 if ! test -v SNAP_ARCH_TRIPLET; then
+    # Intentionally use tildes for commands
+    # shellcheck disable=SC2016
 	printf -- \
 		'image-launch: Error: This launcher depends on the `workaround-snap-arch-triplet-launch` launcher, please incorporate the `workaround-snap-arch-triplet` remote part.\n' \
 		1>&2

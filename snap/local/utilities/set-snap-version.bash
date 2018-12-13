@@ -10,8 +10,7 @@ set \
 
 init(){
 	local \
-		upstream_version \
-		packaging_revision
+		upstream_version
 
 	upstream_version="$(
 		git \
@@ -20,15 +19,6 @@ init(){
 			--dirty=-d \
 			--tags \
 		| sed s/^v//
-	)"
-
-	packaging_revision="$(
-		git \
-			describe \
-			--abbrev=4 \
-			--always \
-			--match nothing \
-			--dirty=-d
 	)"
 
 	printf \

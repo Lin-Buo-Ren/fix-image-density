@@ -232,6 +232,8 @@ process_commandline_arguments() {
                     enable_debug=true
                     ;;
                 --dry-run)
+                    # Whitelist usage of namerefs indirection
+                    # shellcheck disable=SC2034
                     is_dry_run_ref=true
                     ;;
                 --help \
@@ -247,9 +249,13 @@ process_commandline_arguments() {
                             >&2
                         return 1
                     else
-                        width_in_cm_ref="${parameters[0]}"
-                        height_in_cm_ref="${parameters[1]}"
-                        image_file_ref="${parameters[2]}"
+                        # Whitelist usage of namerefs indirections
+                        # shellcheck disable=SC2034
+                        {
+                            width_in_cm_ref="${parameters[0]}"
+                            height_in_cm_ref="${parameters[1]}"
+                            image_file_ref="${parameters[2]}"
+                        }
                         unset \
                             'parameters[0]' \
                             'parameters[1]' \
