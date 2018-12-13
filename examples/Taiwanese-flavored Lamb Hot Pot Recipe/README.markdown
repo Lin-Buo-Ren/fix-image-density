@@ -1,4 +1,6 @@
 # Example: Taiwanese-flavored Lamb Hot Pot Recipe
+<img src=IMG_20181213_150933_HDR.jpg alt='input photo' title='input photo' style='width: 7.5cm' />
+
 This is a Taiwanese-flavored Lamb Hot Pot Recipe, captured by RedMi Note 3's camera and thus have wrong DPI setting(72).
 
 ## What you know
