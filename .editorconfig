@@ -11,5 +11,5 @@ trim_trailing_whitespace = true
 [*.{md,mkd,mkdn,markdown}]
 trim_trailing_whitespace = false
 
-[{snapcraft.yaml,.snapcraft.yaml}]
+[*.{yml,yaml}]
 indent_size = 2
