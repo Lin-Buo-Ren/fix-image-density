@@ -1,0 +1,3 @@
+[diff "imagemagick"]
+    textconv = identify -verbose
+    prompt = false
