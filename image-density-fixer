@@ -17,8 +17,12 @@ declare\
 
 for required_command in \
     basename \
+    bc \
     dirname \
-    realpath; do
+    identify \
+    mogrify \
+    realpath \
+    sed; do
     if ! command -v "${required_command}" &>/dev/null; then
         runtime_dependency_checking_result=fail
 
@@ -31,7 +35,8 @@ for required_command in \
             bc)
                 required_software='GNU bc'
                 ;;
-            identify)
+            identify \
+            |mogrify)
                 required_software='ImageMagick'
                 ;;
             sed)
