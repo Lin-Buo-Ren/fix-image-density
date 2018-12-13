@@ -34,10 +34,13 @@ for required_command in \
             identify)
                 required_software='ImageMagick'
                 ;;
-			*)
-				required_software="${required_command}"
-				;;
-		esac
+            sed)
+                required_software='GNU Sed'
+                ;;
+            *)
+                required_software="${required_command}"
+                ;;
+        esac
 
 		printf -- \
 			'Error: This program requires "%s" to be installed and its executables in the executable searching paths.\n' \
@@ -135,20 +138,22 @@ init(){
             | bc --mathlib
 	)"
 
-	horizontal_dpi="$(
+    horizontal_dpi="$(
         printf --\
             "%s / %s\\n" \
             "${width_in_px}" \
             "${width_in_inch}" \
-            | bc --mathlib
-	)"
-	vertical_dpi="$(
+            | bc --mathlib \
+            | sed 's/\..*$//' # Remove fraction part of decimal
+    )"
+    vertical_dpi="$(
         printf --\
             "%s / %s\\n" \
             "${height_in_px}" \
             "${height_in_inch}" \
-            | bc --mathlib
-	)"
+            | bc --mathlib \
+            | sed 's/\..*$//' # Remove fraction part of decimal
+    )"
 
 	if test "${is_dry_run}" != false; then
 		printf -- \
