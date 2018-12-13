@@ -19,25 +19,17 @@ Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 
 ### In Terminal
-    # Install Snap #
-    sudo snap install --channel=edge image-density-fixer
-    #sudo snap install --channel=beta image-density-fixer
-    #sudo snap install image-density-fixer
+#### Install the snap package
 
-    # Connect the Snap to Optional Interfaces #
-    ## For editing images under `/media` and `/mnt` ##
+    sudo snap install image-density-fixer
+
+#### Allow the snap to access more system resources
+##### For editing images under `/media` and `/mnt`
+
     sudo snap connect image-density-fixer:removable-media
 
 ### The Graphical Way
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/image-density-fixer)
-
-<!-- Uncomment when you have test results
-## What is Working
-* [A list of functionallities that are verified working]
-
-## What is NOT Working...yet 
-Check out the [issue tracker](https://github.com/Lin-Buo-Ren/image-density-fixer/issues) for known issues.
--->
 
 ## Support
 * Report issues regarding using this snap to the issue tracker:  
