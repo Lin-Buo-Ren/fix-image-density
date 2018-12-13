@@ -151,6 +151,14 @@ init(){
 	)"
 
 	if test "${is_dry_run}" != false; then
+		printf -- \
+			'The resulting horizontal dpi: %s\n' \
+			"${horizontal_dpi}"
+		printf -- \
+			'The resulting vertical_dpi dpi: %s\n' \
+			"${vertical_dpi}"
+		printf -- \
+			'The resulting mogrify command:\n    '
         echo mogrify \
             -density "${horizontal_dpi}"x"${vertical_dpi}" \
             "${image_file}"
