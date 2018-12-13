@@ -81,7 +81,7 @@ init(){
     local -i \
         width_in_px \
         height_in_px
-    
+
     local \
         width_in_cm \
         height_in_cm \
@@ -108,7 +108,7 @@ init(){
 		print_help
 		exit 1
 	fi
-	
+
 	width_in_px="$(
         identify \
             -format %w \
@@ -119,7 +119,7 @@ init(){
             -format %h \
             "${image_file}"
 	)"
-	
+
 	# 1 inch = 2.54 centimeters
 	# https://en.wikipedia.org/wiki/Inch
 	width_in_inch="$(
@@ -134,7 +134,7 @@ init(){
             "${height_in_cm}" \
             | bc --mathlib
 	)"
-	
+
 	horizontal_dpi="$(
         printf --\
             "%s / %s\\n" \
@@ -187,7 +187,7 @@ print_help(){
 
 		printf '### `--dry-run` ###\n'
 		printf "Don't actually apply modification to the image, just print what we gonna do.\\n\\n"
-		
+
 		printf '### `-h` / `--help` ###\n'
 		printf 'Print this message\n\n'
 	}
@@ -200,7 +200,7 @@ process_commandline_arguments() {
         height_in_cm_ref \
         image_file_ref \
         is_dry_run_ref
-    
+
     width_in_cm_ref="${1}"; shift 1
     height_in_cm_ref="${1}"; shift 1
     image_file_ref="${1}"; shift 1
@@ -269,7 +269,7 @@ process_commandline_arguments() {
         print_help
         exit 0
     fi
-    
+
 	if [ "${enable_debug}" = true ]; then
 		trap 'trap_return "${FUNCNAME[0]}"' RETURN
 		set -o xtrace
