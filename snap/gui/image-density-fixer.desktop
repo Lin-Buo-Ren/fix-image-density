@@ -1,0 +1,13 @@
+# Desktop Entry of Image Density Fixer
+# Refer the Desktop Entry Specification on how to write this file:
+# https://specifications.freedesktop.org/desktop-entry-spec
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Image Density Fixer
+Comment=Utility for fixing image's density information
+Exec=image-density-fixer
+Icon=${SNAP}/meta/gui/placeholder-logo.png
+# If my-app-name has its own icon
+#Icon=${SNAP}/meta/gui/my-app-name.png
+Categories=Development

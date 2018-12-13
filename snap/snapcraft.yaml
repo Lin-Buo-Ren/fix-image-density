@@ -1,0 +1,175 @@
+%YAML 1.1
+---
+# Snapcraft Recipe for Image Density Fixer
+# ------------------------------
+# This file is in the YAML data serialization format:
+# http://yaml.org
+# For the spec. of writing this file refer the following documentation:
+# * The snapcraft format
+#   https://docs.snapcraft.io/the-snapcraft-format/8337
+# * Snap Documentation
+#   https://docs.snapcraft.io
+# * Topics under the doc category in the Snapcraft Forum
+#   https://forum.snapcraft.io/c/doc
+# For support refer to the snapcraft section in the Snapcraft Forum:
+# https://forum.snapcraft.io/c/snapcraft
+name: image-density-fixer
+summary: Utility for fixing image's density information
+description: |
+  This program fixes the image density(dot-per-inches) according to the user input of its actual real world dimensions(width & height in centimeters)
+
+  The original purpose of this program is to give OCRmyPDF correct image density for proper OCR result.
+
+  This program is licensed under GNU General Public License v3 or later.
+
+# The path of icon to represent the snap, relative to the source tree directory
+# Only PNG or SVG image is supported, dimension must be greater than 256x256px
+#icon: snap/gui/image-density-fixer.png
+
+version: determined-by-version-script
+version-script: ./snap/local/utilities/set-snap-version.bash
+
+confinement: strict
+grade: stable
+
+plugs:
+  # For snaps with a graphical user interface:
+  #desktop:
+  #desktop-legacy:
+  #x11:
+  #unity7:
+  #wayland:
+
+  # Storage access
+  home:
+  removable-media: # Non-A/C
+
+#slots:
+
+apps:
+  image-density-fixer:
+    command: >
+      bin/locales-launch
+      "${SNAP}"/bin/workaround-snap-arch-triplet-launch
+      "${SNAP}"/bin/imagemagick-launch
+      "${SNAP}"/bin/image-density-fixer-launch
+      "${SNAP}"/bin/image-density-fixer
+
+parts:
+  # Utility programs to help with packaging
+  #utilities:
+    #source: snap/local/utilities
+    #plugin: dump
+    #organize:
+      #'*': assets/utilities/
+    #prime:
+    #- -*
+
+  # Launcher programs to fix problems at runtime
+  launchers:
+    source: snap/local/launchers
+    plugin: dump
+    organize:
+      '*-launch': bin/
+
+  # Program patches to solve issues that can't be solved by tweaking in runtime
+  #patches:
+    #source: snap/local/patches
+    #plugin: dump
+    #organize:
+      #'*': assets/patches/
+    #prime:
+    #- -*
+
+  # Remote part for fixing the glibc locales(and gnu gettext I18N support)
+  # This part is only required for non GUI apps that don't uses the desktop-launch launchers
+  locales-launch:
+
+  # Remote part for recording the exact revision for each part during building
+  parts-meta-info:
+
+  # Remote part for support of various desktop technologies
+  # Refer: https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
+  #desktop-gtk3: # for zenity
+
+  # Optional auxiliary part for displaying simple dialogs for better user experience, powered by Zenity
+  # https://forum.snapcraft.io/t/the-zenity-remote-part/8793
+  #zenity:
+    # This part or part recipe is needed until LP#1766878 is fixed
+    #
+    # Bug #1766878 “$SNAPCRAFT_PROJECT_NAME used in a remote part expands to wrong value” : Bugs : Snapcraft
+    # https://bugs.launchpad.net/snapcraft/+bug/1766878
+    #configflags:
+    #- --datarootdir=/snap/$SNAPCRAFT_PROJECT_NAME/current/share
+    #- --disable-libnotify
+    #- --disable-webkitgtk
+    #organize:
+      #snap/$SNAPCRAFT_PROJECT_NAME/current: /
+
+  # Remote part for SNAP_ARCH_TRIPLET workaround
+  workaround-snap-arch-triplet:
+
+  imagemagick:
+    source: snap/local/empty
+    plugin: nil
+
+    stage-packages:
+    - imagemagick
+
+    override-prime: |
+      set \
+        -o errexit \
+        -o nounset
+
+      snapcraftctl prime
+
+      # Create canonical commands for ImageMagick
+      canonical_command=
+
+      for image_magick_command in usr/bin/*-im?; do
+        canonical_command="$(
+          printf -- \
+            "${image_magick_command}" \
+            | sed \
+              's/-im.*$//'
+        )"
+
+        # HACK: Make symbolic link point to symbolic link without using `ln`'s `--relative`, which always dereferences TARGET for some reason :-/
+        image_magick_command="$(
+          printf -- \
+            "${image_magick_command}" \
+            | sed \
+              's/^.*\///'
+        )"
+
+        ln \
+          --force \
+          --symbolic \
+          --verbose \
+          "${image_magick_command}" \
+          "${canonical_command}"
+      done
+
+  image-density-fixer:
+    source: .
+    plugin: dump
+
+    organize:
+      image-density-fixer: bin/
+      README.markdown: documentation/
+
+    stage-packages:
+    - bc
+    #- imagemagick # Replaced by imagemagick part
+
+    stage:
+    - -examples/
+
+    #override-stage: |
+      #set \
+        #-o errexit \
+        #-o nounset
+
+      #snapcraftctl stage
+
+      #./assets/utilities/patch-desktop-entries.bash
