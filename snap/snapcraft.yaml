@@ -109,46 +109,8 @@ parts:
   # Remote part for SNAP_ARCH_TRIPLET workaround
   workaround-snap-arch-triplet:
 
+  # Remote part for a working ImageMagick distribution
   imagemagick:
-    source: snap/local/empty
-    plugin: nil
-
-    stage-packages:
-    - imagemagick
-
-    override-prime: |
-      set \
-        -o errexit \
-        -o nounset
-
-      snapcraftctl prime
-
-      # Create canonical commands for ImageMagick
-      canonical_command=
-
-      for image_magick_command in usr/bin/*-im?; do
-        canonical_command="$(
-          printf -- \
-            "${image_magick_command}" \
-            | sed \
-              's/-im.*$//'
-        )"
-
-        # HACK: Make symbolic link point to symbolic link without using `ln`'s `--relative`, which always dereferences TARGET for some reason :-/
-        image_magick_command="$(
-          printf -- \
-            "${image_magick_command}" \
-            | sed \
-              's/^.*\///'
-        )"
-
-        ln \
-          --force \
-          --symbolic \
-          --verbose \
-          "${image_magick_command}" \
-          "${canonical_command}"
-      done
 
   image-density-fixer:
     source: .
