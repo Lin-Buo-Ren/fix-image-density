@@ -14,7 +14,7 @@
 # For support refer to the snapcraft section in the Snapcraft Forum:
 # https://forum.snapcraft.io/c/snapcraft
 name: image-density-fixer
-summary: Utility for fixing image's density information
+summary: Command-line utility for fixing image's density information
 description: |
   This utility fixes the image density(dot-per-inches) according to the user input of its actual real world dimensions(width & height in centimeters)
 
