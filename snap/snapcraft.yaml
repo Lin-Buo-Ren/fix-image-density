@@ -16,9 +16,9 @@
 name: image-density-fixer
 summary: Utility for fixing image's density information
 description: |
-  This program fixes the image density(dot-per-inches) according to the user input of its actual real world dimensions(width & height in centimeters)
+  This utility fixes the image density(dot-per-inches) according to the user input of its actual real world dimensions(width & height in centimeters)
 
-  The original purpose of this program is to give OCRmyPDF correct image density for proper OCR result.
+  The original purpose is to provide the Tesseract Open Source OCR Engine correct image density for better OCR results.
 
   This program is licensed under GNU General Public License v3 or later.
 
