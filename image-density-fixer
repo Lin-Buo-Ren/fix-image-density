@@ -204,6 +204,11 @@ print_help(){
     return 0
 }; declare -fr print_help;
 
+print_usage(){
+    printf -- \
+        'Usage: image-density-fixer _command-line_options_ _real_width_in_centimeters_ _real_height_in_centimeters_ _image_file_\n'
+}
+
 process_commandline_arguments() {
     local -n \
         width_in_cm_ref \
@@ -244,6 +249,11 @@ process_commandline_arguments() {
                 --help \
                 |-h)
                     print_help
+                    exit 0
+                    ;;
+                --usage \
+                |-u)
+                    print_usage
                     exit 0
                     ;;
                 *)
