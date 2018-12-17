@@ -200,6 +200,9 @@ print_help(){
 
         printf '### `-h` / `--help` ###\n'
         printf 'Print this message\n\n'
+
+        printf '### `-u` / `--usage` ###\n'
+        printf 'Print simple usage information\n\n'
     }
     return 0
 }; declare -fr print_help;
