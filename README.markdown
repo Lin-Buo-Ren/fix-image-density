@@ -5,6 +5,8 @@ This utility fixes the image density(dot-per-inches) according to the user input
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/image-density-fixer)
 
+![The logo of the application](branding/logo.svg)
+
 The original purpose is to provide the Tesseract Open Source OCR Engine correct image density for better OCR results.
 
-This program is licensed under GNU General Public License v3 or later.
+This program is licensed under GNU General Public License v3 or later, the application logo is licensed under  the [Creative Commons Attribution-ShareAlike 4.0 License](https://creativecommons.org/licenses/by-sa/4.0/), powered by the [Suru Project](https://snwh.org/suru) and [Openclipart](https://openclipart.org/).
