@@ -3,7 +3,7 @@
 	Use the Staticaly service for easy access to in-repo pictures:
 	https://www.staticaly.com/
 -->
-![(Placeholder) Icon of Image Density Fixer](gui/placeholder-logo.png "(Placeholder) Icon of Image Density Fixer")
+![(Placeholder) Icon of Image Density Fixer](../branding/logo.svg "(Placeholder) Icon of Image Density Fixer")
 
 **This is the snap for Image Density Fixer**, *"Utility for fixing image's density information"*. It works on Ubuntu, Fedora, Debian, and other major Linux distributions.
 
